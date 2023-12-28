@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Card</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #9f6, #f06);
+        background-size: 400% 400%;
+        animation: gradientAnimation 8s infinite;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #card {
+        background: linear-gradient(45deg, #f06, #9f6, #f06);
+        background-size: 400% 400%;
+        animation: gradientAnimation 10s infinite;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+        padding: 20px;
+        width: 240px;
+        height: 310px;
+        border-radius: 10px;
+        border-style: double;
+        text-align: center;
+      }
+
+      #card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        filter: grayscale(50%) brightness(80%);
+      }
+
+      #card h2,
+      #card p {
+        opacity: 0;
+        display: inline-block;
+      }
+
+      #footer {
+        margin-top: 20px;
+      }
+
+      #social-media {
+        text-align: center;
+        font-size: x-small;
+      }
+
+      #social-media a {
+        margin: 5px;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      #social-media i {
+        font-size: 18px;
+        color: pink;
+        opacity: 0;
+      }
+
+      #social-media a:hover i {
+        font-size: 18px;
+        color: black;
+        opacity: 0;
+      }
+
+      @keyframes gradientAnimation {
+        0% {
+          background-position: 0% 50%;
+        }
+
+        50% {
+          background-position: 100% 50%;
+        }
+
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="card">
+      <img src="iz.png" alt="Foto Profil" />
+      <br />
+      <h2 id="name">IzTechnology</h2>
+      <br />
+      <p id="title">"Aspiring web developer"</p>
+
+      <div id="footer">
+        <div id="social-media">
+          <a href="https://www.facebook.com/xii.iz.9" target="_blank"
+            ><i class="fab fa-facebook"></i
+          ></a>
+          <a href="https://github.com/Iztechnology" target="_blank">
+            <i class="fab fa-github"></i
+          ></a>
+          <a href="https://www.linkedin.com/in/NamaLinkedIn" target="_blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <h5>
+            &copy;2023. IzTechnology. || Diberdayakan oleh ChatGPT
+            <a href="https://www.chatgpt.com" target="_blank"
+              ><i class="fas fa-robot"></i
+            ></a>
+          </h5>
+        </div>
+      </div>
+
+      <script>
+        function revealText(elementId, text) {
+          var element = document.getElementById(elementId);
+          element.innerHTML = "";
+
+          function revealChar(index) {
+            setTimeout(function () {
+              element.innerHTML += text[index];
+              element.style.opacity = "1";
+
+              if (index < text.length - 1) {
+                revealChar(index + 1);
+              } else {
+                setTimeout(function () {
+                  hideText(elementId, text.length - 1, text);
+                }, 9000);
+              }
+            }, 50);
+          }
+
+          revealChar(0);
+        }
+
+        function revealIcons() {
+          var socialMediaIcons = document.querySelectorAll("#social-media a i");
+
+          function revealIcon(index) {
+            setTimeout(function () {
+              socialMediaIcons[index].style.opacity = "1";
+
+              if (index < socialMediaIcons.length - 1) {
+                revealIcon(index + 1);
+              } else {
+                setTimeout(function () {
+                  hideIcons(0);
+                }, 9000);
+              }
+            }, 100);
+          }
+
+          revealIcon(0);
+        }
+
+        function hideIcons(startIndex) {
+          var socialMediaIcons = document.querySelectorAll("#social-media a i");
+
+          function hideIcon(index) {
+            setTimeout(function () {
+              socialMediaIcons[index].style.opacity = "0";
+
+              if (index < socialMediaIcons.length - 1) {
+                hideIcon(index + 1);
+              } else {
+                setTimeout(function () {
+                  revealIcons();
+                }, 10);
+              }
+            }, 50);
+          }
+
+          hideIcon(startIndex);
+        }
+
+        function animateCard() {
+          revealText("name", "<> IzTechnology </>");
+          revealText("title", ".Aspiring WebDeveloper { }");
+
+          revealIcons();
+        }
+
+        window.onload = function () {
+          animateCard();
+        };
+      </script>
+    </div>
+  </body>
+</html>
